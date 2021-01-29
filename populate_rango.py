@@ -1,5 +1,6 @@
 import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tango_with_django_project.settings')
+import random
 
 
 import django
@@ -51,7 +52,7 @@ def populate():
 def add_page(cat, title, url, views=0):
     p = Page.objects.get_or_create(category=cat, title=title)[0]
     p.url = url
-    p.views = views
+    p.views = random.randint(1, 100)
     p.save()
     return p
 
@@ -68,6 +69,8 @@ def add_cat(name, views=0, likes=0):
     elif c.name == "Other Frameworks":
         c.likes = 16
         c.views = 32
+    else:
+        pass
 
     c.save()
     return c
